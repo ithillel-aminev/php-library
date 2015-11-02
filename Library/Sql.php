@@ -1,5 +1,5 @@
 <?php
-namespace Library;
+namespace TAminev\PhpLibrary;
 
 class Sql
 {

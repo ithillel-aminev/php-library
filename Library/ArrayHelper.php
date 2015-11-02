@@ -1,6 +1,6 @@
 <?php
 
-namespace Library;
+namespace TAminev\PhpLibrary;
 
 
 class ArrayHelper {
@@ -48,7 +48,6 @@ class ArrayHelper {
         return array_filter(array_unique(array_map('trim',ArrayHelper::column($marray, $column))));
     }
 
-
     public static function deleteColumn(&$array, $offset) {
         return array_walk($array, function (&$v) use ($offset) {
             array_splice($v, $offset, 1);
@@ -58,7 +57,6 @@ class ArrayHelper {
     public static function pregGrepKeys($pattern, $input, $flags = 0) {
         return array_intersect_key($input, array_flip(preg_grep($pattern, array_keys($input), $flags)));
     }
-
 
     /**
      * Replaces array values on new values.
@@ -85,7 +83,23 @@ class ArrayHelper {
 //        return array_map(function($value){return trim(trim($value),"'\"");},$array);
     }
 
+    public static function removeRowsByKeyWithEmptyValue(&$marray, $key)
+    {
+        foreach ($marray as $mkey=>$array){
+            if (empty ($array[$key])){
+                unset ($marray[$mkey]);
+            }
+        }
+    }
 
+    public static function removeRowsWhereKeyEqualsValue(&$marray, $key, $value)
+    {
+        foreach ($marray as $mkey=>$array){
+            if ($array[$key] == $value){
+                unset ($marray[$mkey]);
+            }
+        }
+    }
 
 
 

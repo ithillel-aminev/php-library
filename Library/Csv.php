@@ -1,7 +1,12 @@
 <?php
-namespace Library;
+
+namespace TAminev\PhpLibrary;
 
 
+/**
+ * Class Csv
+ * @package TAminev\PhpLibrary
+ */
 class Csv {
     const EXTRACT_FILE = 0;
     const EXTRACT_MEMORY = 1;
@@ -10,9 +15,9 @@ class Csv {
         $input = array_key_exists('input',$config) ? $config['input'] : false; // "C:\\Users\\Dmitriy\\Downloads\\current_campaign_mod.sql"
         $output = array_key_exists('output',$config) ? $config['output'] : false; // "C:\\Users\\Dmitriy\\Downloads\\current_campaign_mod_device.sql"
 
-//        $strCount = array_key_exists('strCount',$config) ? $config['strCount'] : false; // 333000
-//        $maxStrLen = array_key_exists('stringMaxLength',$config) ? $config['stringMaxLength'] : false; // 4096
-//        $chunkCountStr = array_key_exists('chunkSize',$config) ? $config['chunkSize'] : false; // 10000
+        $strCount = array_key_exists('strCount',$config) ? $config['strCount'] : false; // 333000
+        $maxStrLen = array_key_exists('stringMaxLength',$config) ? $config['stringMaxLength'] : false; // 4096
+        $chunkCountStr = array_key_exists('chunkSize',$config) ? $config['chunkSize'] : false; // 10000
 
         $columns = array_key_exists('columns',$config) ? $config['columns'] : false; // array(0,16,17,18,19,20,21,22)
         $unique = array_key_exists('unique',$config) ? $config['unique'] : false; // false
