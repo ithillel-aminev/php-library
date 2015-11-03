@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 
-require 'vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 use \TAminev\PhpLibrary\CsvExtractor as Csv;
 use \TAminev\PhpLibrary\ArrayHelper;
@@ -53,6 +53,8 @@ var_dump("reference before flip-flip: " . count($values));
 $values = array_keys(array_flip($values));
 var_dump("reference after flip-flip: " . count($values));
 
+$time=microtime(true);
+
 // 2.2 - rows to filter
 $csv = new Csv('C:\Users\taminev\Downloads\iterativeArrayFilter\arr10.csv', 0);
 $toFilter = $csv->extract();
@@ -73,4 +75,5 @@ var_dump("Before filter " . $countBeforeFilter . " values. ");
 var_dump("After filter " . $countAfterFilter . " values. ");
 
 
-
+$time=microtime(true)-$time;
+echo "\n".'BenchMark: '.$time."\n";

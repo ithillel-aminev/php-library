@@ -95,7 +95,7 @@ class ArrayHelper {
     public static function removeRowsWhereKeyEqualsValue(&$marray, $key, $value)
     {
         foreach ($marray as $mkey=>$array){
-            if ($array[$key] == $value){
+            if ($array[$key] === $value){
                 unset ($marray[$mkey]);
             }
         }
