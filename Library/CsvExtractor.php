@@ -12,7 +12,7 @@ class CsvExtractor
 
     private $skipLines;
 
-    private $debug = true;
+    private static $debug = true;
 
     public function __construct($input, $skipLines = 0){
         $this->input = $input;
@@ -68,6 +68,9 @@ class CsvExtractor
             fputcsv($o, $row);
         }
         fclose($o);
+
+        if (self::$debug)
+            var_dump("Wrote to " . $output . ". ");
     }
 
     /**
@@ -91,12 +94,28 @@ class CsvExtractor
                 fputcsv($output, $row);
             }
             fclose($output);
-            if ($this->debug){
-                var_dump(array("Extracted " . count($arr) . " rows. \n", $config['output']));
-                echo "\n";
+            if (self::$debug){
+                var_dump(array("Extracted " . count($arr) . " rows. ", $config['output']));
             }
         }
         fclose($handle);
     }
+
+    public static function removeRowsWhereKeyEqualsValues($inputFile, $column, &$values, $outputFile)
+    {
+        $csv = new self($inputFile, 0);
+        $toFilter = $csv->extract();
+        ArrayHelper::indexRowsByColumn($toFilter, $column);
+        $rowsInfo = ArrayHelper::removeKeys($toFilter, $values);
+        self::write($toFilter, $outputFile);
+        return array(
+            'info' => $rowsInfo
+        );
+    }
+    public static function getColumnValuesFromMultipleFiles()
+    {
+
+    }
+
 
 }

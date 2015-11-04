@@ -101,6 +101,43 @@ class ArrayHelper {
         }
     }
 
+    public static function indexRowsByColumn(&$marray, $column)
+    {
+        $count = count($marray);
+        for ($i = $count-1; $i>=0; $i--){
+            $newK = $marray[$i][$column];
+            $marray[$newK] =  $marray[$i];
+            unset ($marray[$i]);
+        }
+    }
+
+    public static function removeKeys(&$array, $keys)
+    {
+        $before = count($array);
+        foreach ($keys as $key){
+            unset($array[$key]);
+        }
+        $after = count($array);
+        return array(
+            'info' => array('before' => $before, 'after' => $after),
+        );
+    }
+
+    /**
+     * Remove duplicates values in one-dimension array. No keys persisted i.e. keys are refreshed.
+     * @param array $array
+     * @return array Information about
+     */
+    public static function removeDuplicateValues(array &$array)
+    {
+        $before = count($array);
+        $array = array_keys(array_flip($array));
+        $after = count($array);
+        return array(
+            'info' => array('before' => $before, 'after' => $after),
+        );
+    }
+
 
 
 } 
