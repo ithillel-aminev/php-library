@@ -24,17 +24,17 @@ class CsvExtractor
      * @param array $columns array(0,3,5);
      * @return array
      */
-    public function extract($columns = array())
+    public function extract($columns = array(), $delimiter = ',', $enclosure = '"', $escape = "\\")
     {
         $result = array();
 
         $handle = fopen($this->input, 'r');
 
         for ($i=0; $i<$this->skipLines; $i++){
-            fgetcsv($handle);
+            fgetcsv($handle, 0, $delimiter, $enclosure, $escape);
         }
 
-        while (($data = fgetcsv($handle)) != false){
+        while (($data = fgetcsv($handle, 0, $delimiter, $enclosure, $escape)) != false){
             $row = array();
             if ($columns){
                 foreach ($columns as $column){
